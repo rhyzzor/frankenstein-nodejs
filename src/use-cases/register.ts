@@ -14,7 +14,7 @@ export class RegisterUseCase {
 	async execute({ name, email, password }: RegisterUseCaseRequest) {
 		const passwordHash = await hash(password, 10);
 
-		const user = this.userRepository.create({
+		const user = await this.userRepository.create({
 			name,
 			email,
 			password: passwordHash,

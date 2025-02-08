@@ -3,7 +3,11 @@ import type { NewUser } from "@/lib/database/schema/public/User";
 
 export class UserRepository {
 	async create(data: NewUser) {
-		return await db.insertInto("user").values(data).returningAll().execute();
+		return await db
+			.insertInto("user")
+			.values(data)
+			.returningAll()
+			.executeTakeFirstOrThrow();
 	}
 
 	async findByEmail(email: string) {
