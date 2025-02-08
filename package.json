@@ -1,36 +1,36 @@
 {
-  "name": "frankenstein-nodejs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "tsx watch src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/rhyzzor/frankenstein-nodejs.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/rhyzzor/frankenstein-nodejs/issues"
-  },
-  "homepage": "https://github.com/rhyzzor/frankenstein-nodejs#readme",
-  "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "@types/node": "22.13.1",
-    "@types/pg": "8.11.11",
-    "kanel": "3.11.0",
-    "kysely-ctl": "0.10.1",
-    "tsx": "4.19.2",
-    "typescript": "5.7.3"
-  },
-  "dependencies": {
-    "dotenv": "16.4.7",
-    "kysely": "0.27.5",
-    "pg": "8.13.1",
-    "zod": "3.24.1"
-  }
+	"name": "frankenstein-nodejs",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"dev": "tsx watch src/index.ts",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/rhyzzor/frankenstein-nodejs.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/rhyzzor/frankenstein-nodejs/issues"
+	},
+	"homepage": "https://github.com/rhyzzor/frankenstein-nodejs#readme",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/node": "22.13.1",
+		"@types/pg": "8.11.11",
+		"kanel": "3.11.0",
+		"kysely-ctl": "0.10.1",
+		"tsx": "4.19.2",
+		"typescript": "5.7.3"
+	},
+	"dependencies": {
+		"dotenv": "16.4.7",
+		"kysely": "0.27.5",
+		"pg": "8.13.1",
+		"zod": "3.24.1"
+	}
 }
