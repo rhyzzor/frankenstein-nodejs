@@ -1,9 +1,9 @@
-import type { UserRepository } from "@/repositories/user.repository";
+import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists-error";
 import { RegisterUseCase } from "@/use-cases/register";
 
 let sut: RegisterUseCase;
 
-const mockUserRepository: UserRepository = {
+const mockUserRepository = {
 	create: jest.fn(),
 	findByEmail: jest.fn(),
 };
@@ -17,6 +17,8 @@ const mockUser = {
 describe("RegisterUseCase", () => {
 	beforeEach(() => {
 		sut = new RegisterUseCase(mockUserRepository);
+
+		jest.resetAllMocks();
 	});
 
 	it("should be able to register", async () => {
@@ -26,5 +28,15 @@ describe("RegisterUseCase", () => {
 		expect(mockUserRepository.create).toHaveBeenCalledWith(
 			expect.objectContaining({ ...mockUser, password: expect.any(String) }),
 		);
+	});
+
+	it("should not be able to register with same email", async () => {
+		mockUserRepository.findByEmail.mockResolvedValue(mockUser);
+
+		await expect(sut.execute(mockUser)).rejects.toBeInstanceOf(
+			UserAlreadyExistsError,
+		);
+
+		expect(mockUserRepository.create).not.toHaveBeenCalled();
 	});
 });
