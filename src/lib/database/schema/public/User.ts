@@ -17,6 +17,8 @@ export default interface UserTable {
   createdAt: ColumnType<Date, Date | string | undefined, Date | string>;
 
   updatedAt: ColumnType<Date, Date | string | undefined, Date | string>;
+
+  name: ColumnType<string, string, string>;
 }
 
 export type User = Selectable<UserTable>;
