@@ -1,4 +1,5 @@
 import type { UserId } from "@/lib/database/schema/public/User";
+import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
 import { GetUserProfileUseCase } from "@/use-cases/get-user-profile";
 
 const mockUserRepository = {
@@ -33,6 +34,14 @@ describe("GetUserProfileUseCase", () => {
 				email: "test@test.com",
 				password: expect.any(String),
 			}),
+		);
+	});
+
+	it("should not be able to get user profile with wrong id", async () => {
+		mockUserRepository.findById.mockResolvedValue(null);
+
+		await expect(sut.execute({ userId: 1 as UserId })).rejects.toBeInstanceOf(
+			ResourceNotFoundError,
 		);
 	});
 });
