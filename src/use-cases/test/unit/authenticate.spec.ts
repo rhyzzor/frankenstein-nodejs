@@ -12,6 +12,7 @@ const mockUser = {
 const mockUserRepository = {
 	findByEmail: jest.fn(),
 	create: jest.fn(),
+	findById: jest.fn(),
 };
 
 describe("AuthenticateUseCase", () => {

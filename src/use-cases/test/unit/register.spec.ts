@@ -6,6 +6,7 @@ let sut: RegisterUseCase;
 const mockUserRepository = {
 	create: jest.fn(),
 	findByEmail: jest.fn(),
+	findById: jest.fn(),
 };
 
 const mockUser = {
