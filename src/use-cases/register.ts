@@ -1,3 +1,4 @@
+import type { User } from "@/lib/database/schema/public/User";
 import type { UserRepository } from "@/repositories/user.repository";
 import { hash } from "bcrypt";
 import { UserAlreadyExistsError } from "./errors/user-already-exists-error";
@@ -8,10 +9,18 @@ interface RegisterUseCaseRequest {
 	password: string;
 }
 
+interface RegisterUseCaseResponse {
+	user: User;
+}
+
 export class RegisterUseCase {
 	constructor(private userRepository: UserRepository) {}
 
-	async execute({ name, email, password }: RegisterUseCaseRequest) {
+	async execute({
+		name,
+		email,
+		password,
+	}: RegisterUseCaseRequest): Promise<RegisterUseCaseResponse> {
 		const passwordHash = await hash(password, 10);
 
 		const userWithSameEmail = await this.userRepository.findByEmail(email);
