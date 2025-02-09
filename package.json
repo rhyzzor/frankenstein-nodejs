@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"dev": "tsx watch src/index.ts",
+		"dev": "tsx watch src/server.ts",
 		"test": "jest --runInBand --config ./jest.config.ts",
 		"prepare": "husky",
 		"test:staged": "npm test -- --silent"
@@ -39,6 +39,7 @@
 	"dependencies": {
 		"bcrypt": "5.1.1",
 		"dotenv": "16.4.7",
+		"fastify": "5.2.1",
 		"kysely": "0.27.5",
 		"pg": "8.13.1",
 		"zod": "3.24.1"
