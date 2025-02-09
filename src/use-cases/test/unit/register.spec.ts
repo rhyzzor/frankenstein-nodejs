@@ -1,7 +1,7 @@
 import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists-error";
-import { RegisterUseCase } from "@/use-cases/register";
+import { RegisterUserUseCase } from "@/use-cases/register-user";
 
-let sut: RegisterUseCase;
+let sut: RegisterUserUseCase;
 
 const mockUserRepository = {
 	create: jest.fn(),
@@ -15,9 +15,9 @@ const mockUser = {
 	password: "123456",
 };
 
-describe("RegisterUseCase", () => {
+describe("RegisterUserUseCase", () => {
 	beforeEach(() => {
-		sut = new RegisterUseCase(mockUserRepository);
+		sut = new RegisterUserUseCase(mockUserRepository);
 
 		jest.resetAllMocks();
 	});
