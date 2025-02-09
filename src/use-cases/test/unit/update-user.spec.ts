@@ -1,4 +1,5 @@
 import type { UserId } from "@/lib/database/schema/public/User";
+import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
 import { UpdateUserUseCase } from "@/use-cases/update-user";
 import { mockUserRepository } from "@/utils/test/mock-user-repository";
 
@@ -39,5 +40,16 @@ describe("UpdateUserUseCase", () => {
 				password: expect.any(String),
 			}),
 		);
+	});
+
+	it("should not be able to update a user that does not exist", async () => {
+		mockUserRepository.findById.mockResolvedValue(null);
+
+		await expect(
+			sut.execute({
+				userId: 1 as UserId,
+				data: { name: "John Doe 2" },
+			}),
+		).rejects.toBeInstanceOf(ResourceNotFoundError);
 	});
 });
