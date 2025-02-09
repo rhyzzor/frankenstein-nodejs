@@ -1,5 +1,6 @@
 import type { User } from "@/lib/database/schema/public/User";
 import type { UserRepository } from "@/repositories/user.repository";
+import { compare } from "bcrypt";
 import { InvalidCredentialsError } from "./errors/invalid-credentials-error";
 
 interface AuthenticateUseCaseRequest {
@@ -21,6 +22,14 @@ export class AuthenticateUseCase {
 		const user = await this.userRepository.findByEmail(email);
 
 		if (!user) {
+			throw new InvalidCredentialsError();
+		}
+
+		const { password: hashedPassword } = user;
+
+		const doesPasswordMatches = await compare(password, hashedPassword);
+
+		if (!doesPasswordMatches) {
 			throw new InvalidCredentialsError();
 		}
 
