@@ -3,4 +3,5 @@ export const mockUserRepository = {
 	create: jest.fn(),
 	findById: jest.fn(),
 	findByEmail: jest.fn(),
+	delete: jest.fn(),
 };

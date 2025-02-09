@@ -2,6 +2,10 @@ import { db } from "@/lib/database/kysely";
 import type { NewUser, UserId } from "@/lib/database/schema/public/User";
 
 export class UserRepository {
+	async delete(id: UserId) {
+		await db.deleteFrom("user").where("id", "=", id).execute();
+	}
+
 	async update(data: { id: UserId } & Partial<NewUser>) {
 		return await db
 			.updateTable("user")
