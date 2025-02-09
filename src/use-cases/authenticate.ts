@@ -1,5 +1,6 @@
 import type { User } from "@/lib/database/schema/public/User";
 import type { UserRepository } from "@/repositories/user.repository";
+import { InvalidCredentialsError } from "./errors/invalid-credentials-error";
 
 interface AuthenticateUseCaseRequest {
 	email: string;
@@ -20,7 +21,7 @@ export class AuthenticateUseCase {
 		const user = await this.userRepository.findByEmail(email);
 
 		if (!user) {
-			throw new Error();
+			throw new InvalidCredentialsError();
 		}
 
 		return {
