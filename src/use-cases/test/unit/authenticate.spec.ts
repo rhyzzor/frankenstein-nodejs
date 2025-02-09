@@ -1,5 +1,6 @@
 import { AuthenticateUseCase } from "@/use-cases/authenticate";
 import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error";
+import { hash } from "bcrypt";
 
 let sut: AuthenticateUseCase;
 
@@ -24,16 +25,20 @@ describe("AuthenticateUseCase", () => {
 		mockUserRepository.findByEmail.mockResolvedValue({
 			...mockUser,
 			name: "John Doe",
+			password: await hash("123456", 10),
 			id: 1,
 		});
 
 		const { user } = await sut.execute(mockUser);
 
-		expect(user).toEqual({
-			...mockUser,
-			name: "John Doe",
-			id: 1,
-		});
+		expect(user).toEqual(
+			expect.objectContaining({
+				id: 1,
+				name: "John Doe",
+				email: "test@test.com",
+				password: expect.any(String),
+			}),
+		);
 	});
 
 	it("should not be able to authenticate with wrong email", async () => {
@@ -42,5 +47,18 @@ describe("AuthenticateUseCase", () => {
 		await expect(sut.execute(mockUser)).rejects.toBeInstanceOf(
 			InvalidCredentialsError,
 		);
+	});
+
+	it("should not be able to authenticate with wrong password", async () => {
+		mockUserRepository.findByEmail.mockResolvedValue({
+			...mockUser,
+			name: "John Doe",
+			password: await hash("123456", 10),
+			id: 1,
+		});
+
+		await expect(
+			sut.execute({ ...mockUser, password: "wrong-password" }),
+		).rejects.toBeInstanceOf(InvalidCredentialsError);
 	});
 });
