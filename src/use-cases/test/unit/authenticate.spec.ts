@@ -1,5 +1,6 @@
 import { AuthenticateUseCase } from "@/use-cases/authenticate";
 import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error";
+import { mockUserRepository } from "@/utils/test/mock-user-repository";
 import { hash } from "bcrypt";
 
 let sut: AuthenticateUseCase;
@@ -7,12 +8,6 @@ let sut: AuthenticateUseCase;
 const mockUser = {
 	email: "test@test.com",
 	password: "123456",
-};
-
-const mockUserRepository = {
-	findByEmail: jest.fn(),
-	create: jest.fn(),
-	findById: jest.fn(),
 };
 
 describe("AuthenticateUseCase", () => {

@@ -1,12 +1,7 @@
 import type { UserId } from "@/lib/database/schema/public/User";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-found-error";
 import { GetUserProfileUseCase } from "@/use-cases/get-user-profile";
-
-const mockUserRepository = {
-	findById: jest.fn(),
-	create: jest.fn(),
-	findByEmail: jest.fn(),
-};
+import { mockUserRepository } from "@/utils/test/mock-user-repository";
 
 let sut: GetUserProfileUseCase;
 

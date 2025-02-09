@@ -1,13 +1,8 @@
 import { UserAlreadyExistsError } from "@/use-cases/errors/user-already-exists-error";
 import { RegisterUserUseCase } from "@/use-cases/register-user";
+import { mockUserRepository } from "@/utils/test/mock-user-repository";
 
 let sut: RegisterUserUseCase;
-
-const mockUserRepository = {
-	create: jest.fn(),
-	findByEmail: jest.fn(),
-	findById: jest.fn(),
-};
 
 const mockUser = {
 	name: "John Doe",
