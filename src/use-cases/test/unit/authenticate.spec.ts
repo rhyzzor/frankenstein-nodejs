@@ -1,4 +1,5 @@
 import { AuthenticateUseCase } from "@/use-cases/authenticate";
+import { InvalidCredentialsError } from "@/use-cases/errors/invalid-credentials-error";
 
 let sut: AuthenticateUseCase;
 
@@ -33,5 +34,13 @@ describe("AuthenticateUseCase", () => {
 			name: "John Doe",
 			id: 1,
 		});
+	});
+
+	it("should not be able to authenticate with wrong email", async () => {
+		mockUserRepository.findByEmail.mockResolvedValue(null);
+
+		await expect(sut.execute(mockUser)).rejects.toBeInstanceOf(
+			InvalidCredentialsError,
+		);
 	});
 });
