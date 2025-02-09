@@ -1,5 +1,6 @@
 import type { User, UserId } from "@/lib/database/schema/public/User";
 import type { UserRepository } from "@/repositories/user.repository";
+import { ResourceNotFoundError } from "./errors/resource-not-found-error";
 
 interface GetUserProfileUseCaseRequest {
 	userId: UserId;
@@ -18,7 +19,7 @@ export class GetUserProfileUseCase {
 		const user = await this.userRepository.findById(userId);
 
 		if (!user) {
-			throw new Error("User not found");
+			throw new ResourceNotFoundError();
 		}
 
 		return { user };
