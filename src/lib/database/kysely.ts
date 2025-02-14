@@ -12,5 +12,5 @@ const dialect = new PostgresDialect({
 export const db = new Kysely<Database>({
 	dialect,
 	plugins: [new CamelCasePlugin()],
-	log: ["error", "query"],
+	log: env.NODE_ENV === "dev" ? ["query", "error"] : ["error"],
 });
