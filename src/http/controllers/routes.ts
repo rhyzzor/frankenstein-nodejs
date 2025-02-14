@@ -9,7 +9,7 @@ export async function routes(app: FastifyInstance) {
 		{
 			schema: {
 				tags: ["Auth"],
-				querystring: signInSchema,
+				body: signInSchema,
 			},
 		},
 		signIn,

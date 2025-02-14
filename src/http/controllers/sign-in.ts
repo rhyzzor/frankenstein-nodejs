@@ -4,10 +4,10 @@ import type { FastifyReply, FastifyRequest } from "fastify";
 import type { signInRequest } from "./dto/request";
 
 export async function signIn(
-	request: FastifyRequest<{ Querystring: signInRequest }>,
+	request: FastifyRequest<{ Body: signInRequest }>,
 	reply: FastifyReply,
 ) {
-	const { email, password } = request.query;
+	const { email, password } = request.body;
 
 	try {
 		const authenticateUseCase = makeAuthenticateUse();

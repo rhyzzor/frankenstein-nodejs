@@ -24,7 +24,7 @@ export async function changeDatabaseURL(schema: string) {
 }
 
 async function migrate(url: URL, schema: string) {
-	const newDialect = new PostgresDialect({
+	const dialect = new PostgresDialect({
 		pool: new Pool({
 			connectionString: url.toString(),
 			options: `-c search_path=${schema}`,
@@ -32,7 +32,7 @@ async function migrate(url: URL, schema: string) {
 	});
 
 	const db = new Kysely({
-		dialect: newDialect,
+		dialect,
 	});
 
 	const migrator = new Migrator({
