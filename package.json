@@ -6,6 +6,7 @@
 	"scripts": {
 		"dev": "tsx watch src/server.ts",
 		"test": "jest --runInBand --config ./test/jest.unit.config.ts",
+		"test:e2e": "jest --runInBand --config ./test/jest.e2e.config.ts",
 		"prepare": "husky",
 		"test:staged": "npm test -- --silent"
 	},
