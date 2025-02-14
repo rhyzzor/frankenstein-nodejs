@@ -2,7 +2,7 @@ import { makeAuthenticateUse } from "@/use-cases/factories/make-authenticate-use
 import type { FastifyReply, FastifyRequest } from "fastify";
 import type { signInRequest } from "./dto/request";
 
-export async function authenticate(
+export async function signIn(
 	request: FastifyRequest<{ Querystring: signInRequest }>,
 	reply: FastifyReply,
 ) {

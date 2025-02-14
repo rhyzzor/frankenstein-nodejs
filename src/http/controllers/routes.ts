@@ -1,6 +1,6 @@
 import type { FastifyInstance } from "fastify";
-import { authenticate } from "./authenticate";
 import { signInSchema } from "./dto/request";
+import { signIn } from "./sign-in";
 
 export async function routes(app: FastifyInstance) {
 	app.post(
@@ -10,6 +10,6 @@ export async function routes(app: FastifyInstance) {
 				querystring: signInSchema,
 			},
 		},
-		authenticate,
+		signIn,
 	);
 }
