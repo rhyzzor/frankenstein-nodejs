@@ -6,7 +6,7 @@ const sut = new DeleteUserUseCase(mockUserRepository);
 
 describe("DeleteUserUseCase", () => {
 	it("should be able to delete user", async () => {
-		await sut.execute({ userId: 1 as UserId });
+		await sut.execute({ userId: "teste" as UserId });
 
 		expect(mockUserRepository.delete).toHaveBeenCalledTimes(1);
 	});

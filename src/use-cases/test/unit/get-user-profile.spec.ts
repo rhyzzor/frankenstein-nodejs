@@ -20,7 +20,7 @@ describe("GetUserProfileUseCase", () => {
 			password: "123456",
 		});
 
-		const { user } = await sut.execute({ userId: 1 as UserId });
+		const { user } = await sut.execute({ userId: "teste" as UserId });
 
 		expect(user).toEqual(
 			expect.objectContaining({
@@ -35,8 +35,8 @@ describe("GetUserProfileUseCase", () => {
 	it("should not be able to get user profile with wrong id", async () => {
 		mockUserRepository.findById.mockResolvedValue(null);
 
-		await expect(sut.execute({ userId: 1 as UserId })).rejects.toBeInstanceOf(
-			ResourceNotFoundError,
-		);
+		await expect(
+			sut.execute({ userId: "teste" as UserId }),
+		).rejects.toBeInstanceOf(ResourceNotFoundError);
 	});
 });
