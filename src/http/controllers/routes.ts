@@ -1,5 +1,6 @@
 import type { FastifyInstance } from "fastify";
 import { signInSchema } from "./dto/request";
+import { register } from "./register";
 import { signIn } from "./sign-in";
 
 export async function routes(app: FastifyInstance) {
@@ -11,5 +12,15 @@ export async function routes(app: FastifyInstance) {
 			},
 		},
 		signIn,
+	);
+
+	app.post(
+		"/users",
+		{
+			schema: {
+				body: signInSchema,
+			},
+		},
+		register,
 	);
 }
