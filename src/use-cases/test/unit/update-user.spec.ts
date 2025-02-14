@@ -14,27 +14,27 @@ describe("UpdateUserUseCase", () => {
 
 	it("should be able to update user", async () => {
 		mockUserRepository.findById.mockResolvedValue({
-			id: 1,
+			id: "teste",
 			name: "John Doe",
 			email: "test@test.com",
 			password: "123456",
 		});
 
 		mockUserRepository.update.mockResolvedValue({
-			id: 1,
+			id: "teste",
 			name: "John Doe 2",
 			email: "test@test.com",
 			password: "123456",
 		});
 
 		const { user } = await sut.execute({
-			userId: 1 as UserId,
+			userId: "teste" as UserId,
 			data: { name: "John Doe 2" },
 		});
 
 		expect(user).toEqual(
 			expect.objectContaining({
-				id: 1,
+				id: "teste",
 				name: "John Doe 2",
 				email: "test@test.com",
 				password: expect.any(String),
@@ -47,7 +47,7 @@ describe("UpdateUserUseCase", () => {
 
 		await expect(
 			sut.execute({
-				userId: 1 as UserId,
+				userId: "teste" as UserId,
 				data: { name: "John Doe 2" },
 			}),
 		).rejects.toBeInstanceOf(ResourceNotFoundError);
