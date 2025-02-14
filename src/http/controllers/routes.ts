@@ -1,5 +1,5 @@
 import type { FastifyInstance } from "fastify";
-import { signInSchema } from "./dto/request";
+import { registerSchema, signInSchema } from "./dto/request";
 import { register } from "./register";
 import { signIn } from "./sign-in";
 
@@ -8,6 +8,7 @@ export async function routes(app: FastifyInstance) {
 		"/sign-in",
 		{
 			schema: {
+				tags: ["Auth"],
 				querystring: signInSchema,
 			},
 		},
@@ -18,7 +19,8 @@ export async function routes(app: FastifyInstance) {
 		"/users",
 		{
 			schema: {
-				body: signInSchema,
+				tags: ["User"],
+				body: registerSchema,
 			},
 		},
 		register,
